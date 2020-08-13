@@ -1,6 +1,6 @@
 {
   "name": "@popstas/headless-chrome-crawler",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Distributed web crawler powered by Headless Chrome",
   "main": "index.js",
   "license": "MIT",
@@ -18,12 +18,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yujiosaka/headless-chrome-crawler.git"
+    "url": "git+https://github.com/popstas/headless-chrome-crawler.git"
   },
   "bugs": {
-    "url": "https://github.com/yujiosaka/headless-chrome-crawler/issues"
+    "url": "https://github.com/popstas/headless-chrome-crawler/issues"
   },
-  "homepage": "https://github.com/yujiosaka/headless-chrome-crawler#readme",
+  "homepage": "https://github.com/popstas/headless-chrome-crawler#readme",
   "dependencies": {
     "debug": "3.1.0",
     "jquery": "3.3.1",
