@@ -104,7 +104,7 @@ class Server {
     const delay = this._delays.get(path) || 0;
     setTimeout(() => {
       const route = this._routes.get(path);
-      if (route) {
+      if (typeof route === 'function') {
         route(request, response);
         return;
       }
