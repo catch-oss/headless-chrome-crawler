@@ -6,7 +6,8 @@
   "license": "MIT",
   "author": "Yuji Isobe",
   "scripts": {
-    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "commitmsg": "commitlint -e",
+    "prepare": "husky",
     "lint": "eslint --quiet -f codeframe . || eslint .",
     "jest-exclude-redis-cache": "yarn jest $(find test -name '*.test.js' -not -name 'redis.test.js')",
     "jest": "jest --maxWorkers=1",
@@ -36,6 +37,8 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "20.0.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "9.36.0",
     "@types/debug": "4.1.12",
     "@types/lodash": "4.17.20",
     "@types/node": "24.6.2",
@@ -45,7 +48,7 @@
     "eslint-plugin-import": "^2.32.0",
     "husky": "9.1.7",
     "jest": "^30.2.0",
-    "mime": "4.1.0",
+    "mime-types": "^2.1.35",
     "redis": "^5.8.3",
     "typescript": "5.9.3"
   },

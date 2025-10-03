@@ -1123,6 +1123,8 @@ __metadata:
   dependencies:
     "@commitlint/cli": "npm:^20.1.0"
     "@commitlint/config-conventional": "npm:20.0.0"
+    "@eslint/eslintrc": "npm:^3.3.1"
+    "@eslint/js": "npm:9.36.0"
     "@types/debug": "npm:4.1.12"
     "@types/lodash": "npm:4.17.20"
     "@types/node": "npm:24.6.2"
@@ -1136,7 +1138,7 @@ __metadata:
     jest: "npm:^30.2.0"
     jquery: "npm:^3.7.1"
     lodash: "npm:^4.17.21"
-    mime: "npm:4.1.0"
+    mime-types: "npm:^2.1.35"
     puppeteer: "npm:^24.23.0"
     redis: "npm:^5.8.3"
     robots-parser: "npm:3.0.1"
@@ -4873,15 +4875,6 @@ __metadata:
   dependencies:
     mime-db: "npm:1.52.0"
   checksum: 10c0/82fb07ec56d8ff1fc999a84f2f217aa46cb6ed1033fefaabd5785b9a974ed225c90dc72fff460259e66b95b73648596dbcc50d51ed69cdf464af2d237d3149b2
-  languageName: node
-  linkType: hard
-
-"mime@npm:4.1.0":
-  version: 4.1.0
-  resolution: "mime@npm:4.1.0"
-  bin:
-    mime: bin/cli.js
-  checksum: 10c0/3b8602e50dff1049aea8bb2d4c65afc55bf7f3eb5c17fd2bcb315b8c8ae225a7553297d424d3621757c24cdba99e930ecdc4108467009cdc7ed55614cd55031d
   languageName: node
   linkType: hard
 

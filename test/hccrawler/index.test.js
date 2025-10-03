@@ -544,7 +544,7 @@ describe('HCCrawler', () => {
           expect(this.onError.mock.calls[0][0].message).toContain('Evaluation failed:');
         });
 
-        describe('when the page is protected by CSP meta tag', async () => {
+        describe('when the page is protected by CSP meta tag', () => {
           beforeEach(() => {
             this.server.setContent('/csp.html', `
             <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
@@ -560,7 +560,7 @@ describe('HCCrawler', () => {
           });
         });
 
-        describe('when the page is protected by CSP header', async () => {
+        describe('when the page is protected by CSP header', () => {
           beforeEach(() => {
             this.server.setCSP('/empty.html', 'default-src "self"');
           });
@@ -573,7 +573,7 @@ describe('HCCrawler', () => {
           });
         });
 
-        describe('when the page response is delayed', async () => {
+        describe('when the page response is delayed', () => {
           beforeEach(() => {
             this.server.setResponseDelay('/', 200);
           });
@@ -924,7 +924,7 @@ describe('HCCrawler', () => {
           });
         });
 
-        describe('when the crawler is launched with exporter = JSONLineExporter', async () => {
+      describe('when the crawler is launched with exporter = JSONLineExporter', () => {
           beforeEach(async () => {
             await removeTemporaryFile(JSON_FILE);
             const exporter = new JSONLineExporter({
