@@ -1,6 +1,6 @@
 const { createServer } = require('http');
 const { parse } = require('url');
-const mime = require('mime');
+const mime = require('mime-types');
 
 class Server {
   /**
@@ -94,7 +94,7 @@ class Server {
   _onRequest(request, response) {
     this._handleError(request, response);
     const { path } = parse(request.url);
-    response.setHeader('Content-Type', mime.getType(path));
+    response.setHeader('Content-Type', mime.lookup(path) || 'application/octet-stream');
     const auth = this._auths.get(path);
     if (!this._authenticate(auth, request)) {
       response.writeHead(401, { 'WWW-Authenticate': 'Basic realm="Secure Area"' });
@@ -104,7 +104,7 @@ class Server {
     const delay = this._delays.get(path) || 0;
     setTimeout(() => {
       const route = this._routes.get(path);
-      if (route) {
+      if (typeof route === 'function') {
         route(request, response);
         return;
       }

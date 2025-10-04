@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+set -e
+
+cd -- "$(dirname "$0")/.."
+
+has_script() {
+  node -e "const pkg = require('./package.json'); process.exit(pkg.scripts && Object.prototype.hasOwnProperty.call(pkg.scripts, '$1') ? 0 : 1)"
+}
+
+if ! has_script commitmsg; then
+  exit 0
+fi
+
+export GIT_PARAMS="$*"
+
+yarn run -T commitmsg "$@"
