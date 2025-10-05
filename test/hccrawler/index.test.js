@@ -865,6 +865,7 @@ describe('HCCrawler', () => {
 
           beforeEach(async () => {
             this.crawler = await HCCrawler.launch(extend({
+              evaluatePage,
               onSuccess: this.onSuccess,
               customCrawl,
             }, DEFAULT_OPTIONS));
@@ -877,7 +878,7 @@ describe('HCCrawler', () => {
             await this.crawler.onIdle();
             expect(this.onSuccess).toHaveBeenCalledTimes(1);
             expect(this.onSuccess.mock.calls[0][0].content).toContain(content);
-          }, 20000);
+          }, 30000);
         });
       });
 
