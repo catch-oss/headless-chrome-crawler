@@ -12,9 +12,9 @@
     "jest-exclude-redis-cache": "yarn jest $(find test -name '*.test.js' -not -name 'redis.test.js')",
     "jest": "jest --maxWorkers=1",
     "test": "yarn tsc && yarn lint && yarn jest-exclude-redis-cache",
-    "chromium:dir": "ls -la tmp/chromium/chromium | grep -m 1 mac | awk '{print $9}'",
-    "test:macos:chromium": "yarn dlx @puppeteer/browsers install chromium@latest --path ./tmp/chromium && CHROMIUM_DIR=$(yarn run chromium:dir) && export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true && export PUPPETEER_EXECUTABLE_PATH=\"$(pwd)/tmp/chromium/chromium/$CHROMIUM_DIR/chrome-mac/Chromium.app/Contents/MacOS/Chromium\" && yarn test",
-    "test:macos:chrome": "export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true && export PUPPETEER_EXECUTABLE_PATH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" && yarn test",
+    "chromium:dir": "node -p \"(() => { const fs = require('fs'); const dir = './tmp/chromium/chromium'; if (!fs.existsSync(dir)) return ''; const match = fs.readdirSync(dir).find(name => name.startsWith('mac_')); return match || ''; })()\"",
+    "chromium:download": "yarn dlx @puppeteer/browsers install chromium@latest --path ./tmp/chromium",
+    "test:macos": "/bin/bash -c 'yarn run chromium:download && export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1; export CHROMIUM_DIR=$(yarn run --silent chromium:dir | tr -d \\\r\\\n); export PUPPETEER_EXECUTABLE_PATH=\"$(pwd)/tmp/chromium/chromium/$CHROMIUM_DIR/chrome-mac/Chromium.app/Contents/MacOS/Chromium\"; yarn test'",
     "test-all": "yarn tsc && yarn lint && yarn jest",
     "tsc": "tsc -p ."
   },
