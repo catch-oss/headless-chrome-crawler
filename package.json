@@ -12,6 +12,7 @@
     "jest-exclude-redis-cache": "yarn jest $(find test -name '*.test.js' -not -name 'redis.test.js')",
     "jest": "jest --maxWorkers=1",
     "test": "yarn tsc && yarn lint && yarn jest-exclude-redis-cache",
+    "test:macos": "PUPPETEER_EXECUTABLE_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' yarn test",
     "test-all": "yarn tsc && yarn lint && yarn jest",
     "tsc": "tsc -p ."
   },

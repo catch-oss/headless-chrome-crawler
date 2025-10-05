@@ -14,7 +14,16 @@ const JSON_FILE = './tmp/result.json';
 const PNG_FILE = './tmp/example.png';
 const ENCODING = 'utf8';
 
-const DEFAULT_OPTIONS = { args: ['--no-sandbox'] };
+const DEFAULT_OPTIONS = {
+  args: ['--no-sandbox'],
+};
+
+if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+  DEFAULT_OPTIONS.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+}
+
+// Allow extra time for first-run Chromium downloads on CI and slower Macs.
+jest.setTimeout(120000);
 
 describe('HCCrawler', () => {
   describe('HCCrawler.executablePath', () => {
