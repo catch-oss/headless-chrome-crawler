@@ -6,3 +6,4 @@ tmp/
 .yarn-integrity
 .eslintcache
 .yarn
+tmp/
