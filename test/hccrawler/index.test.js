@@ -14,7 +14,16 @@ const JSON_FILE = './tmp/result.json';
 const PNG_FILE = './tmp/example.png';
 const ENCODING = 'utf8';
 
-const DEFAULT_OPTIONS = { args: ['--no-sandbox'] };
+const DEFAULT_OPTIONS = {
+  args: ['--no-sandbox'],
+};
+
+if (process.env.PUPPETEER_EXECUTABLE_PATH) {
+  DEFAULT_OPTIONS.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH;
+}
+
+// Allow extra time for first-run Chromium downloads on CI and slower Macs.
+jest.setTimeout(120000);
 
 describe('HCCrawler', () => {
   describe('HCCrawler.executablePath', () => {
@@ -58,7 +67,11 @@ describe('HCCrawler', () => {
       this.onError = jest.fn();
     });
 
-    afterEach(() => this.crawler.close());
+    afterEach(async () => {
+      if (this.crawler) {
+        await this.crawler.close();
+      }
+    });
 
     test('launches a crawler', async () => {
       this.crawler = await HCCrawler.launch(DEFAULT_OPTIONS);
@@ -861,6 +874,7 @@ describe('HCCrawler', () => {
 
           beforeEach(async () => {
             this.crawler = await HCCrawler.launch(extend({
+              evaluatePage,
               onSuccess: this.onSuccess,
               customCrawl,
             }, DEFAULT_OPTIONS));
@@ -873,7 +887,7 @@ describe('HCCrawler', () => {
             await this.crawler.onIdle();
             expect(this.onSuccess).toHaveBeenCalledTimes(1);
             expect(this.onSuccess.mock.calls[0][0].content).toContain(content);
-          });
+          }, 30000);
         });
       });
 
