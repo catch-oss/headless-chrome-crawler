@@ -1,0 +1,65 @@
+# Follows the configuration already in use on catch-oss/TheA11yMachine, so the
+# three forks behave the same way.
+#
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    pull-request-branch-name:
+      separator: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "02:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    # Grouped so the devDependency churn (jest, eslint, commitlint and their
+    # trees) arrives as one pull request rather than dozens, and stays separate
+    # from anything that ships to consumers.
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+        patterns:
+          - "*"
+      development-dependencies:
+        dependency-type: "development"
+        patterns:
+          - "*"
+    ignore:
+      # This package is a thin wrapper around puppeteer - lib/hccrawler.js
+      # calls Puppeteer.launch() and both modules read Puppeteer.KnownDevices -
+      # so a major bump is an API migration, not a dependency update. It also
+      # would not help the extract-zip advisories: those come from
+      # @puppeteer/browsers 2.x, and the consumers that pull this crawler in
+      # (accessibility-insights-scan, pa11y, lighthouse) all still require
+      # puppeteer 24.
+      - dependency-name: "puppeteer"
+        update-types: ["version-update:semver-major"]
+      # jquery is injected into crawled pages by lib/crawler.js to evaluate
+      # selectors, so a major bump changes what those selectors match. Worth
+      # doing deliberately rather than automatically.
+      - dependency-name: "jquery"
+        update-types: ["version-update:semver-major"]
+
+  # docker
+  - package-ecosystem: "docker"
+    directory: "/"
+    pull-request-branch-name:
+      separator: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "02:00"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "docker"
+      include: "scope"
+
+# No github-actions entry: this repository has no .github/workflows, so there
+# would be nothing for dependabot to update. Worth adding if CI lands here.
