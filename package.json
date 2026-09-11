@@ -78,7 +78,7 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "/node_modules/(?!@puppeteer/browsers/)"
+      "node_modules/(?!.*@puppeteer/browsers)"
     ]
   }
 }
