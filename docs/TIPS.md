@@ -66,16 +66,14 @@ env DEBUG="hccrawler:browser" node script.js
 
 ## Crawl in Docker
 
-Build the container with [this Dockerfile](https://github.com/yujiosaka/headless-chrome-crawler/blob/master/Dockerfile):
+This fork no longer ships a Dockerfile. The one it inherited was written for
+Node 8 and could not build any more — `libgconf-2-4` has been dropped from
+Debian, it trusted Google's signing key through the deprecated `apt-key add`,
+and its final step installed the upstream `headless-chrome-crawler` package
+from npm rather than this fork.
 
-```sh
-docker build -t headless-chrome-crawler-linux .
-```
+Puppeteer's own [Docker guidance][docker] is the place to start if you need a
+container. Run the crawler as you would any other Puppeteer script inside it,
+and remember `--cap-add=SYS_ADMIN` (or `--no-sandbox`) so Chrome can start.
 
-Run the container by passing `node -e "<yourscript.js content as a string>"` as the command:
-
-```sh
-docker run -i --rm --cap-add=SYS_ADMIN \
-  --name headless-chrome-crawler headless-chrome-crawler-linux \
-  node -e "`cat yourscript.js`"
-```
+[docker]: https://pptr.dev/guides/docker
