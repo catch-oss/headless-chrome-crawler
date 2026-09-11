@@ -38,6 +38,8 @@
     "redis": "2.8.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.0",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "20.0.0",
     "@eslint/eslintrc": "^3.3.1",
@@ -47,6 +49,7 @@
     "@types/node": "24.6.2",
     "@types/puppeteer": "7.0.4",
     "@types/request-promise": "4.1.51",
+    "babel-jest": "^30.2.0",
     "eslint": "^9.36.0",
     "eslint-plugin-import": "^2.32.0",
     "husky": "9.1.7",
@@ -69,5 +72,13 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "yarn@4.10.2+sha512.0b0e54ad5381f0a35184957bd3ea44e37f5a4fb1960b903b0fb9a3c7c2c009190455c41ef2a1977b1dbd3b72c5f152da696e9c52e2bc78a011b6adea8ee73ba3"
+  "packageManager": "yarn@4.10.2+sha512.0b0e54ad5381f0a35184957bd3ea44e37f5a4fb1960b903b0fb9a3c7c2c009190455c41ef2a1977b1dbd3b72c5f152da696e9c52e2bc78a011b6adea8ee73ba3",
+  "resolutions": {
+    "@puppeteer/browsers": "3.2.2"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!.*@puppeteer/browsers)"
+    ]
+  }
 }
